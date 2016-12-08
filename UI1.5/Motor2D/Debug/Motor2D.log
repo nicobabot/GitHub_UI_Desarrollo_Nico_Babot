@@ -1,0 +1,15 @@
+﻿  j1Scene.cpp
+c:\users\nico\desktop\2ndo vj\desarrollo de videojuegos\ui\ui1.5\motor2d\p2sstring.h(275): warning C4018: '<=': signed/unsigned mismatch
+c:\users\nico\desktop\2ndo vj\desarrollo de videojuegos\ui\ui1.5\motor2d\p2sstring.h(291): warning C4018: '>': signed/unsigned mismatch
+c:\users\nico\desktop\2ndo vj\desarrollo de videojuegos\ui\ui1.5\motor2d\p2sstring.h(294): warning C4018: '<=': signed/unsigned mismatch
+c:\users\nico\desktop\2ndo vj\desarrollo de videojuegos\ui\ui1.5\motor2d\p2sstring.h(314): warning C4018: '<': signed/unsigned mismatch
+  UI_Letters_NonStatic_Static.cpp
+c:\users\nico\desktop\2ndo vj\desarrollo de videojuegos\ui\ui1.5\motor2d\p2sstring.h(275): warning C4018: '<=': signed/unsigned mismatch
+c:\users\nico\desktop\2ndo vj\desarrollo de videojuegos\ui\ui1.5\motor2d\p2sstring.h(291): warning C4018: '>': signed/unsigned mismatch
+c:\users\nico\desktop\2ndo vj\desarrollo de videojuegos\ui\ui1.5\motor2d\p2sstring.h(294): warning C4018: '<=': signed/unsigned mismatch
+c:\users\nico\desktop\2ndo vj\desarrollo de videojuegos\ui\ui1.5\motor2d\p2sstring.h(314): warning C4018: '<': signed/unsigned mismatch
+c:\users\nico\desktop\2ndo vj\desarrollo de videojuegos\ui\ui1.5\motor2d\ui_letters_nonstatic_static.cpp(92): warning C4018: '<=': signed/unsigned mismatch
+  Generating Code...
+c:\users\nico\desktop\2ndo vj\desarrollo de videojuegos\ui\ui1.5\motor2d\p2sstring.h(283): warning C4715: 'p2SString::ModifyStrToGetStrFromStartToPosition': not all control paths return a value
+  Motor2D.vcxproj -> C:\Users\nico\Desktop\2ndo VJ\DESARROLLO DE VIDEOJUEGOS\UI\UI1.5\Debug\Development - Class 11 Handout.exe
+  Motor2D.vcxproj -> C:\Users\nico\Desktop\2ndo VJ\DESARROLLO DE VIDEOJUEGOS\UI\UI1.5\Debug\Development - Class 11 Handout.pdb (Full PDB)
