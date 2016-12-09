@@ -42,7 +42,7 @@ void UI_Image::ModifyImage(UI* item, UI_Collision_Type state) {
 		item->SetPosition(itempoint.x, itempoint.y);
 		UI_Collision.x = itempoint.x;
 		UI_Collision.y = itempoint.y;
-		if (item->GetType() == ui_window) {
+		if (item->GetType() == ui_window || item->GetType() == ui_window_to_window) {
 			((UI_Image*)item)->MoveQueue(item);
 		}
 		break;
@@ -52,9 +52,9 @@ void UI_Image::ModifyImage(UI* item, UI_Collision_Type state) {
 
 void UI_Image::Draw(UI* item)
 {
-	if (item->GetType() == ui_window || item->GetType() == ui_image) {
+	if (item->GetType() == ui_window || item->GetType() == ui_image || item->GetType() == ui_window_to_window) {
 		App->render->Blit(App->gui->GetAtlasNotConst(), ((UI_Image*)item)->Getpos().x - App->render->camera.x, ((UI_Image*)item)->Getpos().y - App->render->camera.y, &((UI_Image*)item)->GetRect());
-		if (item->GetType() == ui_window) {
+		if (item->GetType() == ui_window || item->GetType() == ui_window_to_window) {
 			p2PQueue_item<UI*>* temp = Items.start;
 			for (temp; temp != nullptr; temp = temp->next) {
 				switch (temp->data->GetType()) {
@@ -70,9 +70,9 @@ void UI_Image::Draw(UI* item)
 				case ui_letters_static_to_window:
 					((UI_Letters_Static*)temp->data)->Draw(temp->data);
 					break;
-					/*case ui_window:
+					case ui_window_to_window:
 						((UI_Image*)temp->data)->Draw(temp->data);
-						break;*/
+						break;
 				}
 				App->gui->DebugDrawer(temp->data);
 			}
@@ -83,7 +83,9 @@ void UI_Image::Draw(UI* item)
 
 void UI_Image::PushQueueWindow(UI * item)
 {
-	Items.Push(item, item->GetType());
+	if (item != nullptr) {
+		Items.Push(item, item->GetType());
+	}
 }
 
 void UI_Image::MoveQueue(UI* item)
@@ -109,6 +111,10 @@ void UI_Image::MoveQueue(UI* item)
 				break;
 			case ui_letters_static_to_window:
 				((UI_Letters_Static*)temporal->data)->SetCollision(&position);
+				break;
+			case ui_window_to_window:
+				((UI_Image*)temporal->data)->SetCollision(&position);
+				((UI_Image*)temporal->data)->MoveQueue(temporal->data);
 				break;
 			}
 			

@@ -7,6 +7,7 @@
 struct SDL_Texture;
 class GuiImage;
 class GuiText;
+class UI;
 class UI_Image;
 class UI_Letters_Static;
 class UI_Letters_NonStatic;
@@ -39,6 +40,9 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	void Modif_Ui();
+	bool Modif_Ui_WindowElem(UI* window);
+	
 private:
 	SDL_Texture* debug_tex;
 	/*
@@ -48,11 +52,13 @@ private:
 	UI_Image* banner;
 	UI_Letters_Static* text;
 	UI_Buttons* button;
+	UI_Buttons* button2;
 	UI_Image* Window;
+	UI_Image* Window2;
 	SDL_Texture* portal_tex;
 	UI_Letters_NonStatic* WritingText;
 public:
-
+	bool movingitem;
 	iPoint potal_map_tile_1;
 	iPoint potal_map_tile_2;
 

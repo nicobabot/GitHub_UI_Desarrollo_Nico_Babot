@@ -15,6 +15,7 @@ enum UI_Type {
 	ui_letters_static,
 	ui_window,
 	//--------
+	ui_window_to_window,
 	ui_image_to_window,
 	ui_button_to_window,
 	ui_letters_non_static_to_window,

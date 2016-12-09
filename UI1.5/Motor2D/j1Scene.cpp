@@ -76,12 +76,16 @@ bool j1Scene::Start()
 	iPoint windowpos;
 	windowpos.x = 100;
 	windowpos.y = 100;
+	iPoint windowpos2;
+	windowpos2.x = 200;
+	windowpos2.y = 150;
 	SDL_Rect window_rect;
 	window_rect.x = 31;
 	window_rect.y = 541;
 	window_rect.w = 424;
 	window_rect.h = 453;
 	Window = (UI_Image*)App->gui->CreateUiWindow(ui_window, windowpos, &window_rect, true);
+	Window2= (UI_Image*)App->gui->CreateUiWindow(ui_window_to_window, windowpos2, &window_rect, true, Window);
 	text = (UI_Letters_Static*)App->gui->CreateStaticLetters(ui_letters_static_to_window, posstring, &string, true, Window);
 	SDL_Rect button_rect;
 	button_rect.x = 410;
@@ -99,6 +103,7 @@ bool j1Scene::Start()
 	p2SString string2;
 	string2.create("Button");
 	button = (UI_Buttons*)App->gui->CreateButton(ui_button_to_window, buttonpos, &button_rect, &string2, &button_rect2, true, Window);
+	button2 = (UI_Buttons*)App->gui->CreateButton(ui_button_to_window, buttonpos, &button_rect, &string2, &button_rect2, true, Window2);
 	iPoint writingrectpos;
 	writingrectpos.x = 100;
 	writingrectpos.y = 200;
@@ -146,76 +151,83 @@ bool j1Scene::PreUpdate()
 	return true;
 }
 
-// Called each loop iteration
-bool j1Scene::Update(float dt)
-{
-	// Gui ---
-	bool movingitem=false;
+void j1Scene::Modif_Ui() {
+	bool movingitem = false;
 	p2List_item<UI*>* temp = App->gui->GetListStart();
 	for (temp; temp != nullptr; temp = temp->next) {
-		temp->data->onCollision();
 		switch (temp->data->GetType()) {
 		case UI_Type::ui_letters_static:
-			((UI_Letters_Static*)temp->data)->ModifyStatString(temp->data,temp->data->onCollision());
+			((UI_Letters_Static*)temp->data)->ModifyStatString(temp->data, temp->data->onCollision());
 			break;
 		case UI_Type::ui_button:
 			((UI_Buttons*)temp->data)->ModifyButton(temp->data, temp->data->onCollision());
 			break;
-		case UI_Type::ui_window:
 		case UI_Type::ui_image:
-			if (temp->data->GetType() == ui_window) {
-				p2PQueue_item<UI*>* temporal = ((UI_Image*)temp->data)->StartQueue();
-				for (temporal; temporal != nullptr; temporal = temporal->next) {
-					switch (temporal->data->GetType()) {
-					case ui_image_to_window:
-						((UI_Image*)temporal->data)->ModifyImage(temporal->data, temporal->data->onCollision());
-						if (temporal->data->onCollision() == left_click) {
-							movingitem = true;
-						}
-						break;
-					case ui_button_to_window:
-						((UI_Buttons*)temporal->data)->ModifyButton(temporal->data, temporal->data->onCollision());
-						if (temporal->data->onCollision() == left_click) {
-							movingitem = true;
-						}
-						break;
-					case ui_letters_non_static_to_window:
-						((UI_Letters_NonStatic*)temporal->data)->ModifyNonStatString(temporal->data, temporal->data->onCollision());
-						if (temporal->data->onCollision() == left_click) {
-							movingitem = true;
-						}
-						break;
-					case ui_letters_static_to_window:
-						((UI_Letters_Static*)temporal->data)->ModifyStatString(temporal->data, temporal->data->onCollision());
-						if (temporal->data->onCollision() == left_click) {
-							movingitem = true;
-						}
-						break;
-					}
-					App->gui->DebugDrawer(temp->data);
-					if (temporal->data->onCollision() == left_click) {
-						break;
-					}
-					
-				}
-			
-				if (movingitem == false) {
-					((UI_Image*)temp->data)->ModifyImage(temp->data, temp->data->onCollision());
-				}
-				movingitem = false;
-				
-			}
-			else {//if is an image
-				((UI_Image*)temp->data)->ModifyImage(temp->data, temp->data->onCollision());
-			}
+			((UI_Image*)temp->data)->ModifyImage(temp->data, temp->data->onCollision());
 			break;
 		case UI_Type::ui_letters_non_static:
 			((UI_Letters_NonStatic*)temp->data)->ModifyNonStatString(temp->data, temp->data->onCollision());
 			break;
-		}
-		
+		case UI_Type::ui_window:
+			
+			if (Modif_Ui_WindowElem(temp->data) == false) {
+				((UI_Image*)temp->data)->ModifyImage(temp->data, temp->data->onCollision());
+				movingitem = false;
+			}
+			break;
+
 		}
 
+	}
+}
+
+bool j1Scene::Modif_Ui_WindowElem(UI* window) {
+	movingitem = false;
+	p2PQueue_item<UI*>* temp = ((UI_Image*)window)->StartQueue();
+	for (temp; temp != nullptr; temp = temp->next) {
+		switch (temp->data->GetType()) {
+		case ui_window_to_window:
+			Modif_Ui_WindowElem(temp->data);
+			if (temp->data->onCollision() == left_click) {
+				movingitem = true;
+			}
+		case ui_image_to_window:
+			((UI_Image*)temp->data)->ModifyImage(temp->data, temp->data->onCollision());
+			if (temp->data->onCollision() == left_click) {
+				movingitem = true;
+			}
+			break;
+		case ui_button_to_window:
+			((UI_Buttons*)temp->data)->ModifyButton(temp->data, temp->data->onCollision());
+			if (temp->data->onCollision() == left_click) {
+				movingitem = true;
+			}
+			break;
+		case ui_letters_non_static_to_window:
+			((UI_Letters_NonStatic*)temp->data)->ModifyNonStatString(temp->data, temp->data->onCollision());
+			if (temp->data->onCollision() == left_click) {
+				movingitem = true;
+			}
+			break;
+		case ui_letters_static_to_window:
+			((UI_Letters_Static*)temp->data)->ModifyStatString(temp->data, temp->data->onCollision());
+			if (temp->data->onCollision() == left_click) {
+				movingitem = true;
+			}
+			break;
+		}	
+	}
+	return movingitem;
+}
+			
+			
+
+// Called each loop iteration
+bool j1Scene::Update(float dt)
+{
+	// Gui ---
+	
+	Modif_Ui();
 
 
 	

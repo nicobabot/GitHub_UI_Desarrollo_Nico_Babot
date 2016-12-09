@@ -203,12 +203,14 @@ UI* j1Gui::CreateNonStaticLetters(UI_Type entity_type, iPoint pos, p2SString* st
 	return ret;
 }
 
-UI* j1Gui::CreateUiWindow(UI_Type entity_type, iPoint pos, SDL_Rect* rect, bool movable) {
+UI* j1Gui::CreateUiWindow(UI_Type entity_type, iPoint pos, SDL_Rect* rect, bool movable, UI_Image *window_point) {
 	UI* ret = nullptr;
-	if (entity_type == ui_window) {
 		ret = new UI_Image(entity_type, rect, pos, movable);
+	if (entity_type == ui_window) {
 		UI_Elements.add(ret);
-		
+	}
+	else if (entity_type == ui_window_to_window) {
+		window_point->PushQueueWindow(ret);
 	}
 	return ret;
 }
@@ -260,6 +262,7 @@ void j1Gui::DebugDrawer(UI* item) {
 		case UI_Type::ui_letters_static:
 			App->render->DrawQuad(colliderrect, Lime(0), Lime(1), Lime(2), alpha);
 			break;
+		case UI_Type::ui_window_to_window:
 		case UI_Type::ui_window:
 			App->render->DrawQuad(colliderrect, Lime(1), Lime(2), Lime(2), alpha);
 			break;
