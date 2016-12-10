@@ -42,11 +42,12 @@ public:
 	// Gui creation functions
 	// Factory
 	//UI* Create(UI_Type entity_type, iPoint pos, SDL_Rect* rect = nullptr, p2SString* string = nullptr, bool movable=false);
-	UI* CreateButton (UI_Type entity_type, iPoint pos, SDL_Rect* rect, p2SString* string, SDL_Rect* rect2=nullptr, bool movable = false, UI_Image *window_point = nullptr);
+	UI* CreateButton (UI_Type entity_type, iPoint pos, SDL_Rect* rect, p2SString* string, SDL_Rect* rect2=nullptr, SDL_Rect* rect3 = nullptr, bool movable = false, UI_Image *window_point = nullptr);
 	UI* CreateImage(UI_Type entity_type, iPoint pos, SDL_Rect* rect, bool movable = false, UI_Image *window_point = nullptr);
 	UI* CreateStaticLetters(UI_Type entity_type, iPoint pos, p2SString* string, bool movable = false, UI_Image *window_point = nullptr);
 	UI* CreateNonStaticLetters(UI_Type entity_type, iPoint pos, p2SString* string, SDL_Rect writingrect ,bool movable = false, UI_Image *window_point=nullptr);
 	UI* CreateUiWindow(UI_Type entity_type, iPoint pos, SDL_Rect* rect, bool movable = false, UI_Image *window_point = nullptr);
+	UI* CreateSlider(UI_Type type, SDL_Rect* rect, p2SString text, iPoint pos, SDL_Rect * textrect = nullptr, SDL_Rect * ViewPortRect = nullptr, SDL_Rect * VerticalSliderBackgroundRect = nullptr, SDL_Rect * VerticalSliderLineRect = nullptr, bool movable = false);
 	bool Delete(UI* entity_to_delete);
 
 	p2List_item<UI*>* GetListStart();

@@ -11,6 +11,7 @@
 #include "UI_Image_Buttons_Letters.h"
 #include "UI_Letters_NonStatic_Static.h"
 #include"Color.h"
+#include"UI_Slider.h"
 j1Gui::j1Gui() : j1Module()
 {
 	name.create("gui");
@@ -68,6 +69,9 @@ bool j1Gui::Update(float dt)
 			break;
 		case ui_letters_static:
 			((UI_Letters_Static*)temp->data)->Draw(temp->data);
+			break;
+		case ui_slider:
+			((UI_Slider*)temp->data)->Draw(temp->data);
 			break;
 		case ui_window:
 			((UI_Image*)temp->data)->Draw(temp->data);
@@ -150,9 +154,13 @@ SDL_Texture* j1Gui::GetAtlasNotConst()
 	return ret;
 }*/
 
-UI* j1Gui::CreateButton(UI_Type entity_type, iPoint pos, SDL_Rect* rect, p2SString* string, SDL_Rect* rect2, bool movable, UI_Image *window_point) {
+UI* j1Gui::CreateButton(UI_Type entity_type, iPoint pos, SDL_Rect* rect, p2SString* string, SDL_Rect* rect2, SDL_Rect* rect3, bool movable, UI_Image *window_point) {
 	UI* ret = nullptr;
-		ret = new UI_Buttons(entity_type, rect, pos, string, rect2, movable);
+	if (entity_type == ui_button_to_window) {
+		pos.x += window_point->Getpos().x;
+		pos.y += window_point->Getpos().y;
+	}
+		ret = new UI_Buttons(entity_type, rect, pos, string, rect2, rect3, movable);
 		if (entity_type == ui_button) {
 			UI_Elements.add(ret);
 		}
@@ -166,6 +174,10 @@ UI* j1Gui::CreateButton(UI_Type entity_type, iPoint pos, SDL_Rect* rect, p2SStri
 
 UI* j1Gui::CreateImage(UI_Type entity_type, iPoint pos, SDL_Rect* rect, bool movable, UI_Image *window_point) {
 	UI* ret = nullptr;
+	if (entity_type == ui_image_to_window) {
+		pos.x += window_point->Getpos().x;
+		pos.y += window_point->Getpos().y;
+	}
 		ret = new UI_Image(entity_type, rect, pos, movable);
 		if (entity_type == ui_image) {
 			UI_Elements.add(ret);
@@ -179,6 +191,10 @@ UI* j1Gui::CreateImage(UI_Type entity_type, iPoint pos, SDL_Rect* rect, bool mov
 
 UI* j1Gui::CreateStaticLetters(UI_Type entity_type, iPoint pos, p2SString* string, bool movable, UI_Image *window_point) {
 	UI* ret = nullptr;
+	if (entity_type == ui_letters_static_to_window) {
+		pos.x += window_point->Getpos().x;
+		pos.y += window_point->Getpos().y;
+	}
 		ret = new UI_Letters_Static(entity_type, pos, string, movable);
 		if (entity_type == ui_letters_static) {
 			UI_Elements.add(ret);
@@ -192,6 +208,10 @@ UI* j1Gui::CreateStaticLetters(UI_Type entity_type, iPoint pos, p2SString* strin
 }
 UI* j1Gui::CreateNonStaticLetters(UI_Type entity_type, iPoint pos, p2SString* string, SDL_Rect writingrect, bool movable, UI_Image *window_point) {
 	UI* ret = nullptr;
+	if (entity_type == ui_letters_non_static_to_window) {
+		pos.x += window_point->Getpos().x;
+		pos.y += window_point->Getpos().y;
+	}
 	ret = new UI_Letters_NonStatic(entity_type, pos, string, writingrect,movable);
 	if (entity_type == ui_letters_non_static) {
 		UI_Elements.add(ret);
@@ -205,12 +225,26 @@ UI* j1Gui::CreateNonStaticLetters(UI_Type entity_type, iPoint pos, p2SString* st
 
 UI* j1Gui::CreateUiWindow(UI_Type entity_type, iPoint pos, SDL_Rect* rect, bool movable, UI_Image *window_point) {
 	UI* ret = nullptr;
+	if (entity_type == ui_window_to_window) {
+		pos.x += window_point->Getpos().x;
+		pos.y += window_point->Getpos().y;
+	}
 		ret = new UI_Image(entity_type, rect, pos, movable);
 	if (entity_type == ui_window) {
 		UI_Elements.add(ret);
 	}
 	else if (entity_type == ui_window_to_window) {
 		window_point->PushQueueWindow(ret);
+	}
+	return ret;
+}
+
+UI * j1Gui::CreateSlider(UI_Type type, SDL_Rect * rect, p2SString text, iPoint pos, SDL_Rect * textrect, SDL_Rect * ViewPortRect, SDL_Rect * VerticalSliderBackgroundRect, SDL_Rect * VerticalSliderLineRect, bool movable)
+{
+	UI* ret = nullptr;
+	if (type == ui_slider) {
+		ret = new UI_Slider(type, rect, text, pos, textrect, ViewPortRect, VerticalSliderBackgroundRect, VerticalSliderLineRect, movable);
+		UI_Elements.add(ret);
 	}
 	return ret;
 }

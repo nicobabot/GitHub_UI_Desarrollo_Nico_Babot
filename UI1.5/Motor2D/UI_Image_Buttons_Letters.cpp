@@ -136,7 +136,7 @@ void UI_Image::SetCollision(iPoint * col)
 
 
 //-----------------------------------------------UI_Buttons-----------------------------------------------
-UI_Buttons::UI_Buttons(UI_Type type, SDL_Rect* rect, iPoint pos, p2SString *str, SDL_Rect* rect2, bool movable) : UI(type, pos, rect, movable)
+UI_Buttons::UI_Buttons(UI_Type type, SDL_Rect* rect, iPoint pos, p2SString *str, SDL_Rect* rect2, SDL_Rect* rect3, bool movable) : UI(type, pos, rect, movable)
 {
 	this->name = *str;
 	UI_Collision.x = pos.x;
@@ -148,6 +148,11 @@ UI_Buttons::UI_Buttons(UI_Type type, SDL_Rect* rect, iPoint pos, p2SString *str,
 	ButtonChange.y = rect2->y;
 	ButtonChange.w = rect2->w;
 	ButtonChange.h = rect2->h;
+	
+	ButtonChange2.x = rect3->x;
+	ButtonChange2.y = rect3->y;
+	ButtonChange2.w = rect3->w;
+	ButtonChange2.h = rect3->h;
 }
 
 // Destructor
@@ -161,11 +166,13 @@ void UI_Buttons::Draw(UI* item)
 	SDL_Rect rect = item->GetRect();
 
 	if (this->button_state==Button_State::button_pressed) {
-		App->render->Blit(App->gui->GetAtlasNotConst(), item->Getpos().x - App->render->camera.x, item->Getpos().y - App->render->camera.y, &((UI_Buttons*)item)->ButtonChange);
-		
+		App->render->Blit(App->gui->GetAtlasNotConst(), item->Getpos().x - App->render->camera.x, item->Getpos().y - App->render->camera.y, &rect);		
+	}
+	else if (this->button_state == Button_State::buttononcollision) {
+		App->render->Blit(App->gui->GetAtlasNotConst(), item->Getpos().x - App->render->camera.x, item->Getpos().y - App->render->camera.y, &((UI_Buttons*)item)->ButtonChange2);
 	}
 	else {
-		App->render->Blit(App->gui->GetAtlasNotConst(), item->Getpos().x - App->render->camera.x, item->Getpos().y - App->render->camera.y, &rect);
+		App->render->Blit(App->gui->GetAtlasNotConst(), item->Getpos().x - App->render->camera.x, item->Getpos().y - App->render->camera.y, &((UI_Buttons*)item)->ButtonChange);
 	}
 	int w, h;
 	App->font->CalcSize(((UI_Buttons*)item)->name.GetString(), w, h);
@@ -192,7 +199,7 @@ void UI_Buttons::ModifyButton(UI* item,UI_Collision_Type state) {
 		this->button_state = button_pressed;
 		break;
 	case oncollision:
-		this->button_state = button_not_pressed;
+		this->button_state = buttononcollision;
 		break;
 	case notcolliding:
 		this->button_state = button_not_pressed;

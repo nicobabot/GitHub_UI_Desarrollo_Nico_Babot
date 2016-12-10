@@ -96,6 +96,7 @@
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UI_Image_Buttons_Letters.cpp" />
     <ClCompile Include="UI_Letters_NonStatic_Static.cpp" />
+    <ClCompile Include="UI_Slider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color.h" />
@@ -126,6 +127,7 @@
     <ClInclude Include="UI.h" />
     <ClInclude Include="UI_Image_Buttons_Letters.h" />
     <ClInclude Include="UI_Letters_NonStatic_Static.h" />
+    <ClInclude Include="UI_Slider.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Game\config.xml" />

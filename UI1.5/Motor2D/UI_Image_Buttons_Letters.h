@@ -9,7 +9,8 @@ class UI_Letters_Static;
 
 enum Button_State {
 	button_pressed,
-	button_not_pressed
+	button_not_pressed,
+	buttononcollision
 };
 
 
@@ -40,7 +41,7 @@ class UI_Buttons : public UI
 {
 public:
 
-	UI_Buttons(UI_Type type, SDL_Rect* rect, iPoint pos, p2SString *string, SDL_Rect* rect2=nullptr, bool movable=false);
+	UI_Buttons(UI_Type type, SDL_Rect* rect, iPoint pos, p2SString *string, SDL_Rect* rect2=nullptr, SDL_Rect* rect3 = nullptr, bool movable=false);
 
 	// Destructor
 	~UI_Buttons();
@@ -52,6 +53,7 @@ public:
 	void SetCollision(iPoint *col);
 private:
 	SDL_Rect ButtonChange;
+	SDL_Rect ButtonChange2;
 	p2SString name;
 	Button_State button_state;
 

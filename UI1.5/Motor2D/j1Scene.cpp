@@ -63,7 +63,7 @@ bool j1Scene::Start()
 	posbanner.x = 400;
 	posbanner.y = 80;
 	iPoint posstring;
-	posstring.x = 400;
+	posstring.x = 200;
 	posstring.y = 50;
 	p2SString string;
 	string.create("Hello world");
@@ -97,15 +97,21 @@ bool j1Scene::Start()
 	button_rect2.y = 165;
 	button_rect2.w = 231;
 	button_rect2.h = 73;
+	SDL_Rect button_rect3;
+	button_rect3.x = 1;
+	button_rect3.y = 110;
+	button_rect3.w = 230;
+	button_rect3.h = 71;
+
 	iPoint buttonpos;
 	buttonpos.x = 100;
 	buttonpos.y = 100;
 	p2SString string2;
 	string2.create("Button");
-	button = (UI_Buttons*)App->gui->CreateButton(ui_button_to_window, buttonpos, &button_rect, &string2, &button_rect2, true, Window);
-	button2 = (UI_Buttons*)App->gui->CreateButton(ui_button_to_window, buttonpos, &button_rect, &string2, &button_rect2, true, Window2);
+	button = (UI_Buttons*)App->gui->CreateButton(ui_button_to_window, buttonpos, &button_rect, &string2, &button_rect2, &button_rect3, true, Window);
+	button2 = (UI_Buttons*)App->gui->CreateButton(ui_button_to_window, buttonpos, &button_rect, &string2, &button_rect2, &button_rect3, true, Window2);
 	iPoint writingrectpos;
-	writingrectpos.x = 100;
+	writingrectpos.x = 50;
 	writingrectpos.y = 200;
 	SDL_Rect window_rec_writting;
 	window_rec_writting.x = 483;
@@ -116,6 +122,34 @@ bool j1Scene::Start()
 	string3.create("Write here");
 	WritingText= (UI_Letters_NonStatic*)App->gui->CreateNonStaticLetters(ui_letters_non_static_to_window, writingrectpos, &string3, window_rec_writting, true, Window);
 	
+
+	SDL_Rect vertical_scroll_line;
+	vertical_scroll_line.x = 973;
+	vertical_scroll_line.y = 786;
+	vertical_scroll_line.w = 11;
+	vertical_scroll_line.h = 158;
+
+	SDL_Rect vertical_scroll_ball_not_pressed;
+	vertical_scroll_ball_not_pressed.x = 1004;
+	vertical_scroll_ball_not_pressed.y = 430;
+	vertical_scroll_ball_not_pressed.w = 15;
+	vertical_scroll_ball_not_pressed.h = 27;
+
+	SDL_Rect vertical_scroll_ball_pressed;
+	vertical_scroll_ball_pressed.x = 843;
+	vertical_scroll_ball_pressed.y = 321;
+	vertical_scroll_ball_pressed.w = 15;
+	vertical_scroll_ball_pressed.h = 27;
+
+	SDL_Rect vertical_scroll_background;
+	vertical_scroll_background.x = 986;
+	vertical_scroll_background.y = 874;
+	vertical_scroll_background.w = 11;
+	vertical_scroll_background.h = 148;
+
+	p2SString strtext;
+	strtext.create("Hola paco");
+	slider = (UI_Slider*)App->gui->CreateSlider(ui_slider, &vertical_scroll_ball_not_pressed, strtext, iPoint(100, 100), nullptr, nullptr, &vertical_scroll_background, &vertical_scroll_line, false);
 
 
 	return true;

@@ -12,6 +12,7 @@ class UI_Image;
 class UI_Letters_Static;
 class UI_Letters_NonStatic;
 class UI_Buttons;
+class UI_Slider;
 
 class j1Scene : public j1Module
 {
@@ -57,6 +58,7 @@ private:
 	UI_Image* Window2;
 	SDL_Texture* portal_tex;
 	UI_Letters_NonStatic* WritingText;
+	UI_Slider *slider;
 public:
 	bool movingitem;
 	iPoint potal_map_tile_1;

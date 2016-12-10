@@ -13,6 +13,7 @@ enum UI_Type {
 	ui_button,
 	ui_letters_non_static,
 	ui_letters_static,
+	ui_slider,
 	ui_window,
 	//--------
 	ui_window_to_window,
@@ -20,6 +21,7 @@ enum UI_Type {
 	ui_button_to_window,
 	ui_letters_non_static_to_window,
 	ui_letters_static_to_window,
+	ui_slider_to_window,
 
 	unknown
 };

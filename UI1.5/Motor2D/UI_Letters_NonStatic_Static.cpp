@@ -192,7 +192,7 @@ bool UI_Letters_NonStatic::MoveCursor(int leforrright)
 		p2SString string_to_check1(calcchar);
 		p2SString string_to_check2("");
 		if (string_to_check1 != string_to_check2)
-			App->font->CalcSize(calcchar, w, h);
+		App->font->CalcSize(calcchar, w, h);
 		cursor_position = w;
 		letters_moved = letters_moved - leforrright;
 		ret = true;

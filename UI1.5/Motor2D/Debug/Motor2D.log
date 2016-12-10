@@ -1,11 +1,7 @@
-﻿  j1Scene.cpp
-c:\users\nicolasba1\desktop\github_ui_desarrollo_nico_babot\ui1.5\motor2d\p2sstring.h(275): warning C4018: '<=': signed/unsigned mismatch
-c:\users\nicolasba1\desktop\github_ui_desarrollo_nico_babot\ui1.5\motor2d\p2sstring.h(291): warning C4018: '>': signed/unsigned mismatch
-c:\users\nicolasba1\desktop\github_ui_desarrollo_nico_babot\ui1.5\motor2d\p2sstring.h(294): warning C4018: '<=': signed/unsigned mismatch
-c:\users\nicolasba1\desktop\github_ui_desarrollo_nico_babot\ui1.5\motor2d\p2sstring.h(314): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  j1Pathfinding.cpp
-  j1App.cpp
-  Motor2D.vcxproj -> C:\Users\nicolasba1\Desktop\GitHub_UI_Desarrollo_Nico_Babot\UI1.5\Debug\Development - Class 11 Handout.exe
-  Motor2D.vcxproj -> C:\Users\nicolasba1\Desktop\GitHub_UI_Desarrollo_Nico_Babot\UI1.5\Debug\Development - Class 11 Handout.pdb (Full PDB)
+﻿  UI_Slider.cpp
+c:\users\nico\desktop\2ndo vj\desarrollo de videojuegos\github_ui_desarrollo_nico_babot\ui1.5\motor2d\p2sstring.h(275): warning C4018: '<=': signed/unsigned mismatch
+c:\users\nico\desktop\2ndo vj\desarrollo de videojuegos\github_ui_desarrollo_nico_babot\ui1.5\motor2d\p2sstring.h(291): warning C4018: '>': signed/unsigned mismatch
+c:\users\nico\desktop\2ndo vj\desarrollo de videojuegos\github_ui_desarrollo_nico_babot\ui1.5\motor2d\p2sstring.h(294): warning C4018: '<=': signed/unsigned mismatch
+c:\users\nico\desktop\2ndo vj\desarrollo de videojuegos\github_ui_desarrollo_nico_babot\ui1.5\motor2d\p2sstring.h(314): warning C4018: '<': signed/unsigned mismatch
+  Motor2D.vcxproj -> C:\Users\nico\Desktop\2ndo VJ\DESARROLLO DE VIDEOJUEGOS\GitHub_UI_Desarrollo_Nico_Babot\UI1.5\Debug\Development - Class 11 Handout.exe
+  Motor2D.vcxproj -> C:\Users\nico\Desktop\2ndo VJ\DESARROLLO DE VIDEOJUEGOS\GitHub_UI_Desarrollo_Nico_Babot\UI1.5\Debug\Development - Class 11 Handout.pdb (Full PDB)
